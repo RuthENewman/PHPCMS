@@ -7,11 +7,11 @@ class Database {
     public $connection;
 
     public function __construct() {
-        $this->open_db_connection();
+        $this->openDBConnection();
     }
 
-    public function open_db_connection() {
-
+    public function openDBConnection() 
+    {
         $this->connection = mysqli_connect(
             DB_HOST,
             DB_USER,
@@ -20,20 +20,25 @@ class Database {
         );
 
         if (mysqli_connect_errno()) {
-            
             die("Database connection failed " . mysqli_error());
-
         }
     }
 
-    public function query($sql) {
+    public function query($sql) 
+    {
+        return mysqli_query($this->connection, $sql);
+    }
 
-        $result = mysqli_query($this->connection, $sql);
-
+    private function confirmQuery($result) 
+    {
         if(!$result) {
             exit("Query failed");
         }
-        return $result;
+    }
+
+    public function escapeString($string) 
+    {
+        return mysqli_real_escape_string($this->connection, $string);
     }
 
 
