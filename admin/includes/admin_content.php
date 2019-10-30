@@ -8,13 +8,14 @@
             <small>Subheading</small>
         </h1>
         <?php 
-            $user = new User();
-
-            $users = $user->findAllUsers();
-
+            $users = User::findAll();
             while ($user = mysqli_fetch_array($users)) {
                 echo $user['email'] . "<br/>" . $user['first_name'] . " " . $user['last_name'] . "<br />";
             }
+
+            $user = User::find(2);
+            echo $user['first_name'];
+
         ?>
         <ol class="breadcrumb">
             <li>
