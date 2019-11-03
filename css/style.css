@@ -1,0 +1,14 @@
+body {
+    font-family: 'Open Sans', 'Helvetica', sans-serif;
+    background-color: #f0f2fb;
+}
+
+form {
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+label {
+    color: white;
+}

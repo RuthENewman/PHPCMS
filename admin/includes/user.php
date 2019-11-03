@@ -30,11 +30,11 @@ class User {
         return $object;
     }
 
-    public static function verifyUser()
+    public static function verifyUser($email, $password)
     {
         global $database;
 
-        $username = $database->escapeString($username);
+        $email = $database->escapeString($email);
         $password = $database->escapeString($password);
         $sql = "SELECT * FROM users WHERE
                 email = '{$email}' AND 
