@@ -24,6 +24,13 @@ class Session
        } 
     }
 
+    public function logout($user)
+    {
+        unset($_SESSION['user_id']);
+        unset($this->userId);
+        $this->signedIn = false;
+    }
+
     private function checkLogin()
     {
         if(isset($_SESSION['user_id'])) {
