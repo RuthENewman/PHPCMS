@@ -30,6 +30,19 @@ class User {
         return $object;
     }
 
+    public static function verifyUser()
+    {
+        global $database;
+
+        $username = $database->escapeString($username);
+        $password = $database->escapeString($password);
+        $sql = "SELECT * FROM users WHERE
+                email = '{$email}' AND 
+                password = '{$password}' LIMIT 1";
+        $resultArray = self::findQuery($sql);
+        return !empty($resultArray) ? array_shift($resultArray) : false;
+    }
+
     public static function instantiation($record)
     {
         $row = new self();

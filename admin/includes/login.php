@@ -10,6 +10,8 @@
         $username = trim($_POST['username']);
         $password = trim($_POST['password']);
 
+    $userFound = User::verifyUser($username, $password);
+
     if($userFound) {
         $session->login($userFound);
         redirect('index.php');
