@@ -8,8 +8,8 @@
             <small>Subheading</small>
         </h1>
         <?php   
-            $user = User::find(2);
-            echo $user->first_name;
+            $user = User::find($session->userId);
+            echo "Welcome $user->first_name!";
            
         ?>
         <ol class="breadcrumb">

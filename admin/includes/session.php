@@ -11,6 +11,15 @@ class Session
         $this->checkLogin();
     }
 
+    public function message($msg="")
+    {
+        if(!empty($msg)) {
+            $_SESSION['message'] = $msg;
+        } else {
+            return $this->message;
+        }
+    }
+
     public function isSignedIn()
     {
         return $this->signedIn;
@@ -24,7 +33,7 @@ class Session
        } 
     }
 
-    public function logout($user)
+    public function logout()
     {
         unset($_SESSION['user_id']);
         unset($this->userId);
