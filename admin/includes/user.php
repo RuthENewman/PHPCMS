@@ -59,4 +59,34 @@ class User {
        $columnsForRow = get_object_vars($this);
        return array_key_exists($attribute, $columnsForRow);
     }
+
+    public function createUser()
+    {
+        global $database;
+        $sql = "INSERT INTO users (email, password, first_name, last_name)";
+        $sql .= "VALUES ('";
+        $sql .= $database->escapeString($this->email) . "', '";
+        $sql .= $database->escapeString($this->password) . "', '";
+        $sql .= $database->escapeString($this->first_name) . "', '";
+        $sql .= $database->escapeString($this->last_name) . "')";
+        if ($database->query($sql)) {
+            $this->id = $database->insertID();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function update()
+    {
+        global $database;
+        $sql = "UPDATE users SET email= '" . $database->escapeString($this->email) . "', 
+        password= '" . $database->escapeString($this->password) . "', 
+        first_name= '" . $database->escapeString($this->first_name) . "', 
+        last_name= '" . $database->escapeString($this->last_name) . "' 
+        WHERE id=" . $database->escapeString($this->id);
+        $database->query($sql);
+        return (mysqli_affected_rows($database->connection) == 1) ? true : false;
+    }
+
 }

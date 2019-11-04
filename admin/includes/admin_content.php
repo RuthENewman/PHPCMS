@@ -8,9 +8,11 @@
             <small>Subheading</small>
         </h1>
         <?php   
-            $user = User::find($session->userId);
-            echo "Welcome $user->first_name!";
-           
+            $user = User::find(3);
+            $user->email = "naominewman@gmail.com";
+            $user->password = "password123";
+            $user->update();
+
         ?>
         <ol class="breadcrumb">
             <li>
