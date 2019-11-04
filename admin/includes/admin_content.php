@@ -9,9 +9,7 @@
         </h1>
         <?php   
             $user = User::find(3);
-            $user->email = "naominewman@gmail.com";
-            $user->password = "password123";
-            $user->update();
+            $user->delete();
 
         ?>
         <ol class="breadcrumb">
