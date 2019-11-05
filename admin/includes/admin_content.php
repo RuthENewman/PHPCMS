@@ -8,6 +8,18 @@
             <small>Subheading</small>
         </h1>
         <?php   
+            $photos = Photo::findAll();
+            foreach($photos as $photo) {
+                echo $photo->title . "<br />";
+            }
+
+            $photo = new Photo();
+            $photo->title = "Relaxing Caribbean beach";
+            $photo->size = 8;
+            $photo->description = "Enjoying myself on the beach in the Caribbean!";
+            $photo->type = "jpg";
+            $photo->filename = "beach.jpg";
+            $photo->save();
         ?>
         <ol class="breadcrumb">
             <li>
