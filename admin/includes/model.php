@@ -4,12 +4,12 @@ class Model
 {
     public static function findAll()
     {
-        return self::findQuery("SELECT * FROM " . self::$db_table . " ");
+        return static::findQuery("SELECT * FROM " . static::$db_table . " ");
     }
 
     public static function find($id)
     {   
-        $result = self::findQuery("SELECT * FROM " . self::$db_table . " WHERE id = $id LIMIT 1");
+        $result = static::findQuery("SELECT * FROM " . static::$db_table . " WHERE id = $id LIMIT 1");
         return !empty($result) ? array_shift($result) : false;
     }
 
@@ -19,14 +19,15 @@ class Model
         $resultSet = $database->query($sql);
         $object = [];
         while ($row = mysqli_fetch_array($resultSet)) {
-            $object[] = self::instantiation($row); 
+            $object[] = static::instantiation($row); 
         }
         return $object;
     }
 
     public static function instantiation($record)
     {
-        $row = new self();
+        $calledClass = get_called_class();
+        $row = new $calledClass;
         foreach ($record as $attribute => $value) {
             if($row->hasAttribute($attribute)) {
                 $row->$attribute = $value;
