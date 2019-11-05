@@ -8,9 +8,6 @@
             <small>Subheading</small>
         </h1>
         <?php   
-            $user = User::find(3);
-            $user->delete();
-
         ?>
         <ol class="breadcrumb">
             <li>
