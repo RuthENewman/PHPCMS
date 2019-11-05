@@ -44,10 +44,36 @@ class Photo extends Model
         }
     }
 
+    public function save()
+    {
+        if($this->photo_id) {
+            $this->update();
+        } else {
+            if(!empty($this->errors)) {
+                return false;
+            }
+            if(empty($this->filename) || empty($this->tmpPath)) {
+                $this->errors[] = "The file was not available";
+                return false;
+            }
+            $targetPath = SITE_ROOT . DS . 'admin' . DS . $this->uploadDirectory . DS . $this->filename;
+            if(file_exists($targetPath)) {
+                $this->errors[] = "The file {$this->filename} already exists.";
+                return false;
+            }
+            if(move_uploaded_file($this->tmpPath, $targetPath)) {
+                if($this->create()) {
+                    unset($this->tmpPath);
+                    return true;
+                }
+            } else {
+                $this->errors[] = "Please check your permissions";
+            }
+        }
+    }
 
 
 
 
     
-
 }
