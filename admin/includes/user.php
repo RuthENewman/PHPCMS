@@ -1,7 +1,7 @@
 <?php 
 
-class User {
-
+class User extends Model 
+{
     protected static $db_table = "users";
     protected static $db_table_fields = ['email', 'password', 'first_name', 'last_name'];
     public $id;
@@ -10,56 +10,17 @@ class User {
     public $first_name;
     public $last_name;
 
-    public static function findAll()
-    {
-        return self::findQuery("SELECT * FROM users");
-    }
-
-    public static function find($userId)
-    {   
-        $result = self::findQuery("SELECT * FROM users WHERE id = $userId LIMIT 1");
-        return !empty($result) ? array_shift($result) : false;
-    }
-
-    public static function findQuery($sql)
-    {
-        global $database;
-        $resultSet = $database->query($sql);
-        $object = [];
-        while ($row = mysqli_fetch_array($resultSet)) {
-            $object[] = self::instantiation($row); 
-        }
-        return $object;
-    }
-
     public static function verifyUser($email, $password)
     {
         global $database;
 
         $email = $database->escapeString($email);
         $password = $database->escapeString($password);
-        $sql = "SELECT * FROM users WHERE
+        $sql = "SELECT * FROM " . self::$db_table . " WHERE
                 email = '{$email}' AND 
                 password = '{$password}' LIMIT 1";
         $resultArray = self::findQuery($sql);
         return !empty($resultArray) ? array_shift($resultArray) : false;
-    }
-
-    public static function instantiation($record)
-    {
-        $row = new self();
-        foreach ($record as $attribute => $value) {
-            if($row->hasAttribute($attribute)) {
-                $row->$attribute = $value;
-            }
-        }
-        return $row;
-    }
-
-    private function hasAttribute($attribute)
-    {
-       $columnsForRow = get_object_vars($this);
-       return array_key_exists($attribute, $columnsForRow);
     }
 
     protected function properties()
