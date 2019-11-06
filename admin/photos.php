@@ -41,11 +41,11 @@
                             <tbody>
                                 <?php foreach($photos as $photo) : ?>
                                     <tr>
-                                    <td><?php echo $photo->photo_id; ?></td>
+                                    <td><?php echo $photo->id; ?></td>
                                     <td><img class="thumbnail" style="height: 200px; width: 200px;" src="<?php echo $photo->picturePath();?>" alt="" />
                                         <div class="photo-link">
-                                            <a href="delete-photo.php?id=<?php echo $photo->photo_id; ?>">Delete</a>
-                                            <a href="edit-photo.php?id=<?php echo $photo->photo_id; ?>">Edit</a>
+                                            <a href="delete-photo.php?id=<?php echo $photo->id; ?>">Delete</a>
+                                            <a href="edit-photo.php?id=<?php echo $photo->id; ?>">Edit</a>
                                             <a href="#">View</a>
                                         </div>
                                     </td>

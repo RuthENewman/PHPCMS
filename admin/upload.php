@@ -7,10 +7,11 @@ if(isset($_POST['submit'])) {
     $photo = new Photo();
     $photo->title = $_POST['title'];
     $photo->setFile($_FILES['fileUpload']);
+   
 if($photo->save()) {
     $message = "Photo uploaded successfully!";
 } else {
-    $message = join("<br />", $photo->errors);
+    $message = join("<br /> ", $photo->errors);
 }
 }
 

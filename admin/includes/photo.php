@@ -3,14 +3,16 @@
 class Photo extends Model
 {
     protected static $db_table = "photos";
-    protected static $db_table_fields = ['id', 'title', 'description', 'filename', 'type', 'size'];
+    protected static $db_table_fields = ['title', 'description', 'caption', 'filename', 'type', 'size', 'alternateText'];
 
-    public $photo_id;
+    public $id;
     public $title;
     public $description;
+    public $caption;
     public $filename;
     public $type;
     public $size;
+    public $alternateText;
 
     public $tmpPath;
     public $uploadDirectory = "images";
@@ -52,7 +54,7 @@ class Photo extends Model
 
     public function save()
     {
-        if($this->photo_id) {
+        if($this->id) {
             $this->update();
         } else {
             if(!empty($this->errors)) {
@@ -78,7 +80,15 @@ class Photo extends Model
         }
     }
 
-
+    public function deletePhoto()
+    {
+        if ($this->delete()) {
+            $targetPath = SITE_ROOT . DS . "admin" . DS . $this->picturePath();
+            return unlink($targetPath) ? true : false;
+        } else {
+            return false;
+        }
+    }
 
 
 
