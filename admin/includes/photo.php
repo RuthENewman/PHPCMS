@@ -44,6 +44,12 @@ class Photo extends Model
         }
     }
 
+    public function picturePath()
+    {
+        return $this->uploadDirectory . DS . $this->filename;
+    }
+
+
     public function save()
     {
         if($this->photo_id) {
@@ -75,5 +81,5 @@ class Photo extends Model
 
 
 
-    
+
 }

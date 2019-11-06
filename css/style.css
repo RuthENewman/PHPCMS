@@ -3,6 +3,11 @@ body {
     background-color: #f0f2fb;
 }
 
+.thumbnail {
+    height: 50px;
+    width: 50px;
+}
+
 form {
     border: 1px solid black;
     border-radius: 4px;

@@ -31,20 +31,26 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
+                                    <th>ID</th>
                                     <th>Photo</th>
-                                    <th>ID</tH>
-                                    <th>File Name</th>
                                     <th>Title</th>
+                                    <th>File Name</th>
                                     <th>Size</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php foreach($photos as $photo) : ?>
                                     <tr>
-                                    <td><img src="http://placehold.it/62x62" alt="" /></td>
                                     <td><?php echo $photo->photo_id; ?></td>
-                                    <td><?php echo $photo->filename; ?></td>
+                                    <td><img class="thumbnail" style="height: 200px; width: 200px;" src="<?php echo $photo->picturePath();?>" alt="" />
+                                        <div class="photo-link">
+                                            <a href="delete-photo.php?id=<?php echo $photo->photo_id; ?>">Delete</a>
+                                            <a href="edit-photo.php?id=<?php echo $photo->photo_id; ?>">Edit</a>
+                                            <a href="#">View</a>
+                                        </div>
+                                    </td>
                                     <td><?php echo $photo->title; ?></td>
+                                    <td><?php echo $photo->filename; ?></td>
                                     <td><?php echo $photo->size; ?></td>
                                 </tr>
                               <?php endforeach ?>
