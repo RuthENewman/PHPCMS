@@ -51,7 +51,6 @@ class Photo extends Model
         return $this->uploadDirectory . DS . $this->filename;
     }
 
-
     public function save()
     {
         if($this->id) {
